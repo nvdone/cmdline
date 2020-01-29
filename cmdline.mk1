@@ -1,0 +1,29 @@
+!define BLANK ""
+D:\Dev\foss\cmdline\cmdline.obj : D:\Dev\foss\cmdline\cmdline.cpp .AUTODEPEN&
+D
+ @D:
+ cd D:\Dev\foss\cmdline
+ *wpp386 cmdline.cpp -i="C:\WATCOM/h;C:\WATCOM/h/nt" -w4 -e25 -zkl -zku=1251&
+ -zq -ot -ob -ol -ol+ -oi -oa -or -oh -om -on -oe20 -fp6 -fpi87 -6r -bt=nt -&
+fo=.obj -mf -xs -xr
+
+D:\Dev\foss\cmdline\param.obj : D:\Dev\foss\cmdline\param.cpp .AUTODEPEND
+ @D:
+ cd D:\Dev\foss\cmdline
+ *wpp386 param.cpp -i="C:\WATCOM/h;C:\WATCOM/h/nt" -w4 -e25 -zkl -zku=1251 -&
+zq -ot -ob -ol -ol+ -oi -oa -or -oh -om -on -oe20 -fp6 -fpi87 -6r -bt=nt -fo&
+=.obj -mf -xs -xr
+
+D:\Dev\foss\cmdline\cmdline.lib : D:\Dev\foss\cmdline\cmdline.obj D:\Dev\fos&
+s\cmdline\param.obj D:\Dev\foss\cmdline\cmdline.hpp .AUTODEPEND
+ @D:
+ cd D:\Dev\foss\cmdline
+ %create cmdline.lb1
+!ifneq BLANK "cmdline.obj param.obj"
+ @for %i in (cmdline.obj param.obj) do @%append cmdline.lb1 +'%i'
+!endif
+!ifneq BLANK ""
+ @for %i in () do @%append cmdline.lb1 +'%i'
+!endif
+ *wlib -b -c -n -q -p=512 cmdline.lib @cmdline.lb1
+
