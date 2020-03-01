@@ -14,7 +14,7 @@
 
 #include "cmdline.hpp"
 
-CmdLine::CmdLine(wchar_t *cmdline)
+CmdLine::CmdLine(const wchar_t *cmdline)
 {
 	nParams = nOptions = nCommands = 0;
 	root = leaf = NULL;
@@ -54,7 +54,7 @@ CmdLine::~CmdLine()
 	}
 }
 
-int CmdLine::HasParam(wchar_t *name, int lc)
+int CmdLine::HasParam(const wchar_t *name, int lc)
 {
 	Param *l = root;
 
@@ -110,7 +110,7 @@ Param *CmdLine::GetOption(int n)
 	return NULL;
 }
 
-wchar_t *CmdLine::GetOptionValue(wchar_t *name, int lc, int lcv)
+wchar_t *CmdLine::GetOptionValue(const wchar_t *name, int lc, int lcv)
 {
 	Param *l = root;
 

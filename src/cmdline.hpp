@@ -29,7 +29,7 @@ class Param
 
 		int isoption;
 
-		wchar_t *getToken(wchar_t **str, int isName);
+		wchar_t *getToken(const wchar_t **str, int isName);
 
 	public:
 
@@ -39,10 +39,10 @@ class Param
 		Param(Param *root);
 		~Param();
 
-		wchar_t *Parse(wchar_t *str);
+		const wchar_t *Parse(const wchar_t *str);
 
 		int IsOption();
-		int NameIs(wchar_t *candidate, int lc);
+		int NameIs(const wchar_t *candidate, int lc);
 
 		wchar_t *GetName(int lc);
 		wchar_t *GetValue(int lc);
@@ -61,14 +61,14 @@ class CmdLine
 
 	public:
 
-		CmdLine(wchar_t *cmdline);
+		CmdLine(const wchar_t *cmdline);
 		~CmdLine();
 
-		int HasParam(wchar_t *name, int lc);
+		int HasParam(const wchar_t *name, int lc);
 
 		Param *GetParam(int n);
 		Param *GetOption(int n);
-		wchar_t *GetOptionValue(wchar_t *name, int lc, int lcv);
+		wchar_t *GetOptionValue(const wchar_t *name, int lc, int lcv);
 		Param *GetCommand(int n);
 
 		int CountParams();

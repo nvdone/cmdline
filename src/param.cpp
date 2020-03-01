@@ -14,11 +14,11 @@
 
 #include "cmdline.hpp"
 
-wchar_t *Param::getToken(wchar_t **str, int isName)
+wchar_t *Param::getToken(const wchar_t **str, int isName)
 {
-	wchar_t *p = *str;
+	const wchar_t *p = *str;
 
-	int len = 1;
+	size_t len = 1;
 	int quoted = (*p == L'"');
 
 	if(quoted)
@@ -135,7 +135,7 @@ Param::~Param()
 	name = name_l = value = value_l = NULL;
 }
 
-wchar_t *Param::Parse(wchar_t *str)
+const wchar_t *Param::Parse(const wchar_t *str)
 {
 	while(*str && *str == L' ')
 		str++;
@@ -147,7 +147,7 @@ wchar_t *Param::Parse(wchar_t *str)
 	if(name == NULL)
 		return str;
 
-	int name_len = wcslen(name);
+	size_t name_len = wcslen(name);
 	name_l = new wchar_t[name_len + 1];
 	memset(name_l, 0,  sizeof(wchar_t) * (name_len + 1));
 	memcpy(name_l, name, sizeof(wchar_t) * name_len);
@@ -164,7 +164,7 @@ wchar_t *Param::Parse(wchar_t *str)
 		if(value == NULL)
 			return str;
 
-		int value_len = wcslen(value);
+		size_t value_len = wcslen(value);
 		value_l = new wchar_t[value_len + 1];
 		memset(value_l, 0,  sizeof(wchar_t) * (value_len + 1));
 		memcpy(value_l, value, sizeof(wchar_t) * value_len);
@@ -179,7 +179,7 @@ int Param::IsOption()
 	return isoption;
 }
 
-int Param::NameIs(wchar_t *candidate, int lc)
+int Param::NameIs(const wchar_t *candidate, int lc)
 {
 	if(!name)
 		return 0;
